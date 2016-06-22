@@ -1,0 +1,10 @@
+<plugin name='translations' version='0.1' grailsVersion='2.4 &gt; *'>
+  <author>Alexey Zinchenko</author>
+  <authorEmail>prominence96@gmail.com</authorEmail>
+  <title>Translations Plugin</title>
+  <description>    Plugin for runtime edition of i18n files which used for translations.
+    </description>
+  <documentation>http://grails.org/plugin/translations</documentation>
+  <type>TranslationsGrailsPlugin</type>
+  <resources />
+</plugin>
