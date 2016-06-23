@@ -4,7 +4,10 @@ class TranslationsOverviewController {
 
     def bundleService
 
-    def index() { }
+    def index() {
+
+        render view: 'index', model: [bundles: bundleService.getBundles()]
+    }
 
     def showBundles() {
 

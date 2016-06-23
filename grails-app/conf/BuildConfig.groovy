@@ -32,7 +32,7 @@ grails.project.dependency.resolution = {
         mavenCentral()
         // uncomment the below to enable remote dependency resolution
         // from public Maven repositories
-        //mavenRepo "http://repository.codehaus.org"
+        mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
     }
@@ -48,5 +48,11 @@ grails.project.dependency.resolution = {
         }
 
         build(':tomcat:7.0.55')
+
+        runtime ':resources:1.2.14'
+        //runtime ':cache-headers:1.1.5'
+       // runtime ':cached-resources:1.0'
+        runtime ':zipped-resources:1.0'
+        runtime ':twitter-bootstrap:3.3.5'
     }
 }

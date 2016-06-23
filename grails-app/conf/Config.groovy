@@ -23,3 +23,5 @@ log4j = {
 
 grails.views.gsp.encoding = "UTF-8"
 grails.converters.encoding = "UTF-8"
+
+grails.plugins.twitterbootstrap.fixtaglib = true
