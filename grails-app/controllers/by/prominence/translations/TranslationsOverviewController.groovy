@@ -9,8 +9,19 @@ class TranslationsOverviewController {
         render view: 'index', model: [bundles: bundleService.getBundles()]
     }
 
-    def showBundles() {
+    def show() {
 
-        render view: 'showBundles', model: [bundles: bundleService.getBundles()]
+        if (!params.bundleName) {
+            // render error
+        }
+
+        Bundle bundle = bundleService.findBundleByName(params.bundleName as String)
+
+        if (!bundle) {
+            // render error
+        }
+
+        render view: 'show', model: [bundle: bundle]
     }
+
 }

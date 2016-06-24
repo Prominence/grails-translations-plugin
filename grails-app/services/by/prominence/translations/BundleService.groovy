@@ -4,7 +4,8 @@ class BundleService {
 
     private HashSet<Bundle> cachedBundles
 
-    private static final defaultFolder = "i18n"
+    private static final String DEFAULT_FOLDER = "i18n"
+    private static final String DEFAULT_EXTENSION = '.properties'
 
     HashSet<Bundle> getBundles(boolean noCache = false) {
         if (!cachedBundles || noCache) {
@@ -13,11 +14,18 @@ class BundleService {
         return cachedBundles
     }
 
+    Bundle findBundleByName(String name) {
+
+        getBundles().find { Bundle bundle ->
+            bundle.name == name
+        }
+    }
+
     private Map<String, Bundle> searchForBundles() {
         Map<String, Bundle> result = new HashMap<>()
 
         new File('.').eachFileRecurse() { File file ->
-            if(file.name.endsWith('.properties')) {
+            if(file.name.endsWith(DEFAULT_EXTENSION)) {
                 if (isTranslationProperty(file)) {
 
                     String bundleName = getBundleName(file.name)
@@ -34,7 +42,7 @@ class BundleService {
     }
 
     private boolean isTranslationProperty(File file) {
-        return file.parent.contains(defaultFolder)
+        return file.parent.contains(DEFAULT_FOLDER)
     }
 
     private String getFileNameWithoutExtension(String filename) {

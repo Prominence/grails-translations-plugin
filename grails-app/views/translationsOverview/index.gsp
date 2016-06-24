@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta name="layout" content="main"/>
-    <title><g:message code="plugin.translations.overview.page.title" /></title>
+    <title><g:message code="plugin.translations.overview.index.page.title" /></title>
     <r:require modules="bootstrap"/>
 </head>
 
@@ -10,23 +10,13 @@
     <g:if test="${bundles}">
         <ol>
             <g:each in="${bundles}" var="bundle">
-                <li>${bundle.name}<li>
-                <ul>
-                    <g:each in="${bundle.propertiesList}" var="properties">
-                        <li>${properties.name}</li>
-                        ${properties.text.eachLine { line ->
-                            print('----------> ' + line + '<br/>')
-                        }}
-                    </g:each>
-                </ul>
+                <li><g:link action="show" params="${[bundleName: bundle.name]}" >${bundle.name}</g:link></li>
             </g:each>
         </ol>
     </g:if>
     <g:else>
         There is no bundles!
     </g:else>
-    <button class="btn btn-default" type="button">
-        Test bootstrap button
-    </button>
+    <g:message code="plugin.translations.totalBundles" args="${[bundles.size()]}"/>
 </body>
 </html>
