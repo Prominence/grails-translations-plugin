@@ -45,6 +45,27 @@ class TranslationsOverviewController {
 
     def saveFile() {
 
+        Bundle bundle = bundleService.findBundleByName(params.bundleName as String)
+        Language language = bundle.languages.find { Language lang ->
+            lang.languageTag = params.lang
+        }
+
+        params.each { String key, value ->
+            if (key.startsWith('translations.')) {
+                language.translations."${key}" = value
+            }
+        }
+
+        language.translations.each { key, value ->
+            language.languageFile.write("${key} = ${value}\n")
+        }
+
+        if (params.bundleName) {
+            redirect action: 'edit', model: [bundleName: params.bundleName]
+            return
+        }
+
+        redirect action: 'index'
     }
 
 }
