@@ -25,7 +25,7 @@
             </tr>
             <tr>
                 <g:each in="${bundle.propertiesList}" var="propertyFile">
-                    <td><g:message code="plugin.translations.totalRecords" args="${propertyFile.readLines().size()}"/></td>
+                    <td><g:message code="plugin.translations.totalRecords" args="${propertyFile.readLines()?.size() ?: '0'}"/></td>
                 </g:each>
             </tr>
         </tbody>
