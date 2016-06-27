@@ -12,13 +12,15 @@ class TranslationsOverviewController {
     def show() {
 
         if (!params.bundleName) {
-            // render error
+            redirect action: 'index'
+            return
         }
 
         Bundle bundle = bundleService.findBundleByName(params.bundleName as String)
 
         if (!bundle) {
-            // render error
+            render view: 'index', model: [message: g.message(code: 'plugin.translations.error.bundleNotFound', args: [params.bundleName as String])]
+            return
         }
 
         render view: 'show', model: [bundle: bundle]
