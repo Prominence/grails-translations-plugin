@@ -3,9 +3,9 @@ package by.prominence.translations
 class Bundle {
 
     String name
-    List<File> propertiesList = new ArrayList<>()
+    List<Language> languages = new ArrayList<>()
 
-    public void addPropertyFile(File file) {
-        propertiesList.add(file)
+    public void addLanguage(Language lang) {
+        languages.add(lang)
     }
 }

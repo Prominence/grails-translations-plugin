@@ -12,20 +12,22 @@
     <table>
         <thead>
             <tr>
-                <g:each in="${bundle.propertiesList}" var="propertyFile">
-                    <th>${propertyFile.name}</th>
+                <g:each in="${bundle.languages}" var="language">
+                    <th>${language.languageTag.toUpperCase()}</th>
                 </g:each>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <g:each in="${bundle.propertiesList}" var="propertyFile">
-                    <td>${propertyFile.text}</td>
+                <g:each in="${bundle.languages}" var="language">
+                    <td>${language.translations.each {key, value ->
+                        print (key + '=' + value)
+                    }}</td>
                 </g:each>
             </tr>
             <tr>
-                <g:each in="${bundle.propertiesList}" var="propertyFile">
-                    <td><g:message code="plugin.translations.totalRecords" args="${propertyFile.readLines()?.size() ?: '0'}"/></td>
+                <g:each in="${bundle.languages}" var="language">
+                    <td><g:message code="plugin.translations.totalRecords" args="${language.translations.size() ?: '0'}"/></td>
                 </g:each>
             </tr>
         </tbody>

@@ -6,6 +6,7 @@ class BundleService {
 
     private static final String DEFAULT_FOLDER = "i18n"
     private static final String DEFAULT_EXTENSION = '.properties'
+    private static final String STANDARD_LANGUAGE_TAG = 'standard'
 
     HashSet<Bundle> getBundles(boolean noCache = false) {
         if (!cachedBundles || noCache) {
@@ -33,7 +34,9 @@ class BundleService {
                         Bundle bundle = new Bundle(name: bundleName)
                         result.put(bundleName, bundle)
                     }
-                    result.get(bundleName).addPropertyFile(file)
+                    Language lang = createLanguage(file)
+                    lang.bundle = result.get(bundleName)
+                    result.get(bundleName).addLanguage(lang)
                 }
             }
         }
@@ -42,7 +45,7 @@ class BundleService {
     }
 
     private boolean isTranslationProperty(File file) {
-        return file.parent.contains(DEFAULT_FOLDER)
+        return file.parent.contains(DEFAULT_FOLDER) //TODO: is it necessary to use parent?
     }
 
     private String getFileNameWithoutExtension(String filename) {
@@ -53,5 +56,36 @@ class BundleService {
         return filename.indexOf('_') < 0 ?
                 getFileNameWithoutExtension(filename) :
                 filename.substring(0, filename.indexOf('_'))
+    }
+    private Language createLanguage(File file) {
+
+        Language lang = new Language()
+        lang.languageFile = file
+
+        String filename = getFileNameWithoutExtension(file.name)
+
+        // setting language tag
+        if (filename.contains('_')) {
+            String tag = filename.substring(filename.indexOf('_') + 1)
+            lang.languageTag = tag
+        } else {
+            lang.languageTag = STANDARD_LANGUAGE_TAG
+        }
+
+        file.text.readLines().each { String line ->
+            if (!line.equals('')) {
+                lang.translations.put(getKey(line), getValue(line))
+            }
+        }
+
+        return lang
+    }
+
+    private String getKey(String line) {
+        return line.substring(0, line.indexOf('='))
+    }
+
+    private String getValue(String line) {
+        return line.substring(line.indexOf('=') + 1)
     }
 }
