@@ -2,6 +2,8 @@ package by.prominence.translations
 
 class BundleService {
 
+    static transactional = false
+
     private HashSet<Bundle> cachedBundles
 
     private static final String DEFAULT_FOLDER = "i18n"
