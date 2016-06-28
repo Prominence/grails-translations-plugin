@@ -20,9 +20,11 @@
         <tbody>
             <tr>
                 <g:each in="${bundle.languages}" var="language">
-                    <td>${language.translations.each {key, value ->
-                        print (key + '=' + value)
-                    }}</td>
+                    <td>
+                        <g:each in="${language.translations}" var="translation">
+                            ${translation.key} = ${translation.value} </br>
+                        </g:each>
+                    </td>
                 </g:each>
             </tr>
             <tr>

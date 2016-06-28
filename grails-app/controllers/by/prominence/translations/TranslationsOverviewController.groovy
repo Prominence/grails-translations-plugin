@@ -47,17 +47,20 @@ class TranslationsOverviewController {
 
         Bundle bundle = bundleService.findBundleByName(params.bundleName as String)
         Language language = bundle.languages.find { Language lang ->
-            lang.languageTag = params.lang
+            lang.languageTag == params.lang
         }
 
         params.each { String key, value ->
             if (key.startsWith('translations.')) {
+                key = key.substring(key.indexOf('.') + 1)
                 language.translations."${key}" = value
             }
         }
 
-        language.translations.each { key, value ->
-            language.languageFile.write("${key} = ${value}\n")
+        language.languageFile.newWriter().withWriter { w ->
+            language.translations.each { key, value ->
+                w << ("${key} = ${value}\n")
+            }
         }
 
         if (params.bundleName) {

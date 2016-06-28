@@ -82,10 +82,10 @@ class BundleService {
     }
 
     private String getKey(String line) {
-        return line.substring(0, line.indexOf('='))
+        return line.substring(0, line.indexOf('=')).trim()
     }
 
     private String getValue(String line) {
-        return line.substring(line.indexOf('=') + 1)
+        return line.substring(line.indexOf('=') + 1).trim()
     }
 }
