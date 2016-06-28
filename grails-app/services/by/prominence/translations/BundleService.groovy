@@ -45,7 +45,7 @@ class BundleService {
     }
 
     private boolean isTranslationProperty(File file) {
-        return file.parent.contains(DEFAULT_FOLDER) //TODO: is it necessary to use parent?
+        return file.path.contains(DEFAULT_FOLDER)
     }
 
     private String getFileNameWithoutExtension(String filename) {
