@@ -1,0 +1,36 @@
+html {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    background-color: #222222;
+    color: #e3e3e3;
+}
+
+table {
+    width: 100%;
+}
+
+.main-container {
+    margin-top: 10%;
+    border: #000 solid 1px;
+    background-color: #707070;
+    padding: 10px;
+    color: #fff;
+    font-size: 1.2em;
+}
+
+.total {
+    margin: 10px;
+    font-size: 1.5em;
+}
+
+.action-buttons {
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+.table-hover tbody tr:hover {
+    color: #111;
+}

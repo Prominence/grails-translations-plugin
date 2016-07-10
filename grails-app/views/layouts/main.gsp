@@ -5,9 +5,13 @@
     <title><g:layoutTitle default="Translations overview" /></title>
     <r:layoutResources/>
 </head>
-    <g:layoutBody />
     <r:layoutResources/>
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'translations.css')}" type="text/css">
 <body>
+
+<div class="container main-container">
+    <g:layoutBody />
+</div>
 
 </body>
 </html>
