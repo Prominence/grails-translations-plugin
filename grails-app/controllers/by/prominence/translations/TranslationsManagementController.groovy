@@ -1,5 +1,8 @@
 package by.prominence.translations
 
+import java.util.zip.ZipEntry
+import java.util.zip.ZipOutputStream
+
 class TranslationsManagementController {
 
     def bundleService
@@ -52,6 +55,41 @@ class TranslationsManagementController {
         }
 
         redirect action: 'index'
+    }
+
+    def export() {
+
+        if (params.bundleName) {
+
+            Bundle bundle = bundleService.findBundleByName(params.bundleName)
+
+            if (params.langTag) {
+                File exportFile = bundle.languages.find { lang ->
+                    lang.languageTag == params.langTag
+                }?.languageFile
+
+                if (exportFile && exportFile.exists()) {
+                    response.setHeader "Content-disposition", "attachment; filename=${exportFile.name}"
+                    response.contentType = 'text/plain'
+                    response.contentLength = exportFile.size()
+                    response.outputStream << exportFile.bytes
+
+                }
+            } else {
+                response.contentType = 'aplication/octet-stream'
+                response.setHeader('Content-disposition', "attachment; filename=\"${bundle.name}.zip\"")
+
+                ZipOutputStream zipOutputStream = new ZipOutputStream(response.outputStream)
+                bundle.languages.each { lang ->
+                    ZipEntry language = new ZipEntry(lang.languageFile.name)
+                    zipOutputStream.putNextEntry(language)
+                    zipOutputStream.write(lang.languageFile.bytes)
+                }
+                zipOutputStream.close()
+            }
+        } else {
+            redirect action: 'index'
+        }
     }
 
 }

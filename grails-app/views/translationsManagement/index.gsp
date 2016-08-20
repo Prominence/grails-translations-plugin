@@ -3,7 +3,6 @@
 <head>
     <meta name="layout" content="main"/>
     <title><g:message code="plugin.translations.overview.index.page.title" /></title>
-    <r:require modules="bootstrap"/>
 </head>
 
 <body>
@@ -34,22 +33,20 @@
                             <b>${bundle.name}</b>
                         </td>
                         <td>
-                            <div class="action-buttons">
-                                <g:link action="edit" params="${[bundleName: bundle.name]}"
-                                        class="btn btn-default">
-                                    <g:message code="plugin.translations.action.edit"/>
-                                </g:link>
-                                <g:link action="export" params="${[bundleName: bundle.name]}"
-                                        class="btn btn-primary">
-                                    <g:message code="plugin.translations.action.export"/>
-                                </g:link>
-                            </div>
+                            <g:link action="export" params="${[bundleName: bundle.name]}"
+                                    class="btn btn-default">
+                                <g:message code="plugin.translations.action.export"/>
+                            </g:link>
+                            <g:link action="edit" params="${[bundleName: bundle.name]}"
+                                    class="btn btn-primary">
+                                <g:message code="plugin.translations.action.edit"/>
+                            </g:link>
                         </td>
                     </tr>
                 </g:each>
             </tbody>
         </table>
-        <div class="total">
+        <div class="translations-total-label">
             <g:message code="plugin.translations.totalBundles" args="${[bundles.size()]}"/>
         </div>
     </g:if>

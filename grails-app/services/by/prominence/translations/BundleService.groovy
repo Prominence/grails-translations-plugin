@@ -8,7 +8,7 @@ class BundleService {
 
     private static final String DEFAULT_FOLDER = "i18n"
     private static final String DEFAULT_EXTENSION = '.properties'
-    private static final String STANDARD_LANGUAGE_TAG = 'standard'
+    private static final String STANDARD_LANGUAGE_TAG = 'default'
 
     HashSet<Bundle> getBundles(boolean noCache = false) {
         if (!cachedBundles || noCache) {
