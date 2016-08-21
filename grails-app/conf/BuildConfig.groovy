@@ -16,8 +16,6 @@ grails.project.fork = [
     console: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256]
 ]
 
-grails.server.port.http = 8082
-
 grails.project.dependency.resolver = "maven" // or ivy
 grails.project.dependency.resolution = {
     // inherit Grails' default dependencies
@@ -51,7 +49,7 @@ grails.project.dependency.resolution = {
 
         runtime ':resources:1.2.14'
         //runtime ':cache-headers:1.1.5'
-       // runtime ':cached-resources:1.0'
+        //runtime ':cached-resources:1.0'
         runtime ':zipped-resources:1.0'
         runtime ':twitter-bootstrap:3.3.5'
     }
