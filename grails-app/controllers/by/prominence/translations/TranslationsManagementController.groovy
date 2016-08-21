@@ -76,7 +76,7 @@ class TranslationsManagementController {
 
                 }
             } else {
-                response.contentType = 'aplication/octet-stream'
+                response.contentType = 'application/octet-stream'
                 response.setHeader('Content-disposition', "attachment; filename=\"${bundle.name}.zip\"")
 
                 ZipOutputStream zipOutputStream = new ZipOutputStream(response.outputStream)
